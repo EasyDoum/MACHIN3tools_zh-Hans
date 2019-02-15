@@ -10,7 +10,7 @@ from .. items import focus_method_items, focus_levels_items
 
 class Focus(bpy.types.Operator):
     bl_idname = "machin3.focus"
-    bl_label = "MACHIN3: Focus"
+    bl_label = "MACHIN3: 聚焦"
     bl_options = {'REGISTER', 'UNDO'}
 
     method: EnumProperty(name="Method", items=focus_method_items, default='VIEW_SELECTED')

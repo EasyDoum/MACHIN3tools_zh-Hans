@@ -10,7 +10,7 @@ state_items = [("MIN", "Minimum", ""),
 
 class ClippingToggle(bpy.types.Operator):
     bl_idname = "machin3.clipping_toggle"
-    bl_label = "MACHIN3: Clipping Toggle"
+    bl_label = "MACHIN3: 剪切切换"
     bl_options = {'REGISTER', 'UNDO'}
 
     def update_clip_start_maximum(self, context):
@@ -90,9 +90,9 @@ class ClippingToggle(bpy.types.Operator):
         self.reset = False
         self.avoid_execute = True
 
-    maximum: FloatProperty(name="Maximum", default=1, min=0, precision=2, step=10, update=update_clip_start_maximum)
-    medium: FloatProperty(name="Medium", default=0.1, min=0, precision=3, step=1, update=update_clip_start_medium)
-    minimum: FloatProperty(name="Minimum", default=0.001, min=0, precision=5, step=0.001, update=update_clip_start_minimum)
+    maximum: FloatProperty(name="最大值", default=1, min=0, precision=2, step=10, update=update_clip_start_maximum)
+    medium: FloatProperty(name="中间值", default=0.1, min=0, precision=3, step=1, update=update_clip_start_medium)
+    minimum: FloatProperty(name="最小值", default=0.001, min=0, precision=5, step=0.001, update=update_clip_start_minimum)
 
     state: EnumProperty(name="Current State", items=state_items, default="MED", update=update_state)
     reset: BoolProperty(default=False, update=update_reset)

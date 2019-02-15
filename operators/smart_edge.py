@@ -5,7 +5,7 @@ import bmesh
 
 class SmartEdge(bpy.types.Operator):
     bl_idname = "machin3.smart_edge"
-    bl_label = "MACHIN3: Smart Edge"
+    bl_label = "MACHIN3: 智能线"
     bl_options = {'REGISTER', 'UNDO'}
 
     sharp: BoolProperty(name="Toggle Sharp", default=False)
