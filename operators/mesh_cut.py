@@ -7,8 +7,8 @@ from .. utils.object import flatten
 
 class MeshCut(bpy.types.Operator):
     bl_idname = "machin3.mesh_cut"
-    bl_label = "MACHIN3: Mesh Cut"
-    bl_description = "Knife Intersect a mesh, using another object.\nALT: flatten target object's modifier stack\nSHIFT: Mark Seam"
+    bl_label = "MACHIN3: 网格切割"
+    bl_description = "切刀与网格相交,使用另一个对象.\nALT: 展开目标对象的修改器堆栈\nSHIFT: 标记缝合边"
     bl_options = {'REGISTER', 'UNDO'}
 
     @classmethod

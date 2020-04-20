@@ -50,23 +50,23 @@ class PieModes(Menu):
                             blendpath = abspath(active.library.filepath)
                             library = active.library.name
 
-                            op = pie.operator("machin3.open_library_blend", text="Open %s" % (os.path.basename(blendpath)))
+                            op = pie.operator("machin3.open_library_blend", text="打开 %s" % (os.path.basename(blendpath)))
                             op.blendpath = blendpath
                             op.library = library
 
                         else:
                             # 4 - LEFT
-                            pie.operator("machin3.mesh_mode", text="Vertex", icon_value=get_icon('vertex')).mode = 'VERT'
+                            pie.operator("machin3.mesh_mode", text="顶点", icon_value=get_icon('vertex')).mode = 'VERT'
 
                             # 6 - RIGHT
-                            pie.operator("machin3.mesh_mode", text="Face", icon_value=get_icon('face')).mode = 'FACE'
+                            pie.operator("machin3.mesh_mode", text="面", icon_value=get_icon('face')).mode = 'FACE'
 
                             # 2 - BOTTOM
-                            pie.operator("machin3.mesh_mode", text="Edge", icon_value=get_icon('face')).mode = 'EDGE'
+                            pie.operator("machin3.mesh_mode", text="边", icon_value=get_icon('face')).mode = 'EDGE'
 
                             # 8 - TOP
                             if context.mode == 'OBJECT' and grouppro and len(context.scene.storedGroupSettings):
-                                pie.operator("object.close_grouppro", text="Close Group")
+                                pie.operator("object.close_grouppro", text="关闭群组")
 
                             else:
                                 text, icon = ("Edit", get_icon('edit_mesh')) if active.mode == "OBJECT" else ("Object", get_icon('object'))
@@ -92,9 +92,9 @@ class PieModes(Menu):
 
                                 row = column.row()
                                 row.scale_y = 1.2
-                                row.prop(context.scene.M3, "pass_through", text="穿透" if context.scene.M3.pass_through else "Occlude", icon="XRAY")
+                                row.prop(context.scene.M3, "pass_through", text="贯穿选择(当前)" if context.scene.M3.pass_through else "Occlude", icon="XRAY")
 
-                                column.prop(toolsettings, "use_mesh_automerge", text="自动合并")
+                                column.prop(toolsettings, "use_mesh_automerge", text="自动合并(快捷键:双击G键)")
 
                             else:
                                 pie.separator()
@@ -104,39 +104,39 @@ class PieModes(Menu):
 
                         if context.mode == "OBJECT":
                             # 4 - LEFT
-                            pie.operator("machin3.image_mode", text="UV Edit", icon="GROUP_UVS").mode = "UV"
+                            pie.operator("machin3.image_mode", text="UV编辑", icon="GROUP_UVS").mode = "UV"
 
                             # 6 - RIGHT
-                            pie.operator("machin3.image_mode", text="Paint", icon="TPAINT_HLT").mode = "PAINT"
+                            pie.operator("machin3.image_mode", text="绘制", icon="TPAINT_HLT").mode = "PAINT"
 
                             # 2 - BOTTOM)
-                            pie.operator("machin3.image_mode", text="Mask", icon="MOD_MASK").mode = "MASK"
+                            pie.operator("machin3.image_mode", text="遮罩", icon="MOD_MASK").mode = "MASK"
 
                             # 8 - TOP
-                            pie.operator("machin3.image_mode", text="View", icon="FILE_IMAGE").mode = "VIEW"
+                            pie.operator("machin3.image_mode", text="视图", icon="FILE_IMAGE").mode = "VIEW"
 
 
                         elif context.mode == "EDIT_MESH":
                             # 4 - LEFT
-                            pie.operator("machin3.uv_mode", text="Vertex", icon_value=get_icon('vertex')).mode = "VERTEX"
+                            pie.operator("machin3.uv_mode", text="顶点", icon_value=get_icon('vertex')).mode = "VERTEX"
 
                             # 6 - RIGHT
-                            pie.operator("machin3.uv_mode", text="Face", icon_value=get_icon('face')).mode = "FACE"
+                            pie.operator("machin3.uv_mode", text="面", icon_value=get_icon('face')).mode = "FACE"
 
                             # 2 - BOTTOM
-                            pie.operator("machin3.uv_mode", text="Edge", icon_value=get_icon('edge')).mode = "EDGE"
+                            pie.operator("machin3.uv_mode", text="边", icon_value=get_icon('edge')).mode = "EDGE"
 
                             # 8 - TOP
-                            pie.operator("object.mode_set", text="Object", icon_value=get_icon('object')).mode = "OBJECT"
+                            pie.operator("object.mode_set", text="对象", icon_value=get_icon('object')).mode = "OBJECT"
 
                             # 7 - TOP - LEFT
-                            pie.prop(context.scene.M3, "uv_sync_select", text="Sync Selection", icon="UV_SYNC_SELECT")
+                            pie.prop(context.scene.M3, "uv_sync_select", text="同步选择", icon="UV_SYNC_SELECT")
 
                             # 9 - TOP - RIGHT
                             if toolsettings.use_uv_select_sync:
                                 pie.separator()
                             else:
-                                pie.operator("machin3.uv_mode", text="Island", icon_value=get_icon('island')).mode = "ISLAND"
+                                pie.operator("machin3.uv_mode", text="孤岛", icon_value=get_icon('island')).mode = "ISLAND"
 
                             # 1 - BOTTOM - LEFT
                             pie.separator()
@@ -146,17 +146,17 @@ class PieModes(Menu):
 
                 elif active.type == 'ARMATURE':
                     # 4 - LEFT
-                    pie.operator("object.mode_set", text="Edit Mode", icon='EDITMODE_HLT').mode = "EDIT"
+                    pie.operator("object.mode_set", text="编辑模式", icon='EDITMODE_HLT').mode = "EDIT"
 
                     # 6 - RIGHT
-                    pie.operator("object.mode_set", text="Pose", icon='POSE_HLT').mode = "POSE"
+                    pie.operator("object.mode_set", text="姿势", icon='POSE_HLT').mode = "POSE"
 
                     # 2 - BOTTOM
                     pie.separator()
 
                     # 8 - TOP
                     if context.mode == "OBJECT" and grouppro and len(context.scene.storedGroupSettings):
-                        pie.operator("object.close_grouppro", text="Close Group")
+                        pie.operator("object.close_grouppro", text="关闭群组")
 
                     else:
                         text, icon = ("Edit", "EDITMODE_HLT") if active.mode == "OBJECT" else ("Object", "OBJECT_DATAMODE")
@@ -193,7 +193,7 @@ class PieModes(Menu):
 
                     # 9 - TOP
                     if context.mode == 'OBJECT' and grouppro and len(context.scene.storedGroupSettings):
-                        pie.operator("object.close_grouppro", text="Close Group")
+                        pie.operator("object.close_grouppro", text="关闭群组")
 
                     else:
                         text, icon = ("Edit", "EDITMODE_HLT") if active.mode == "OBJECT" else ("Object", "OBJECT_DATAMODE")
@@ -219,7 +219,7 @@ class PieModes(Menu):
 
                         row = column.row()
                         row.scale_y = 1.2
-                        row.prop(context.scene.M3, "pass_through", text="穿透" if context.scene.M3.pass_through else "Occlude", icon="XRAY")
+                        row.prop(context.scene.M3, "pass_through", text="贯穿选择" if context.scene.M3.pass_through else "Occlude", icon="XRAY")
                     else:
                         pie.separator()
 
@@ -227,17 +227,17 @@ class PieModes(Menu):
                     gpd = context.gpencil_data
 
                     # 4 - LEFT
-                    pie.operator("object.mode_set", text="Draw", icon='GREASEPENCIL').mode = "PAINT_GPENCIL"
+                    pie.operator("object.mode_set", text="绘制", icon='GREASEPENCIL').mode = "PAINT_GPENCIL"
 
                     # 6 - RIGHT
-                    pie.operator("object.mode_set", text="Sculpt", icon='SCULPTMODE_HLT').mode = "SCULPT_GPENCIL"
+                    pie.operator("object.mode_set", text="雕刻", icon='SCULPTMODE_HLT').mode = "SCULPT_GPENCIL"
 
                     # 2 - BOTTOM
-                    pie.operator("object.mode_set", text="Edit Mode", icon='EDITMODE_HLT').mode = "EDIT_GPENCIL"
+                    pie.operator("object.mode_set", text="编辑模式", icon='EDITMODE_HLT').mode = "EDIT_GPENCIL"
 
                     # 8 - TOP
                     if context.mode == 'OBJECT' and grouppro and len(context.scene.storedGroupSettings):
-                        pie.operator("object.close_grouppro", text="Close Group")
+                        pie.operator("object.close_grouppro", text="关闭群组")
 
                     else:
                         text, icon = ("Draw", "GREASEPENCIL") if active.mode == "OBJECT" else ("Object", "OBJECT_DATAMODE")
@@ -288,12 +288,12 @@ class PieModes(Menu):
 
                         r = row.row(align=True)
                         r.active = gpd.use_multiedit
-                        r.popover(panel="VIEW3D_PT_gpencil_multi_frame", text="Multiframe")
+                        r.popover(panel="VIEW3D_PT_gpencil_multi_frame", text="复帧")
 
                         row = column.row(align=True)
                         row.prop(toolsettings.gpencil_sculpt, "use_select_mask", text="")
 
-                        row.popover(panel="VIEW3D_PT_tools_grease_pencil_interpolate", text="Interpolate")
+                        row.popover(panel="VIEW3D_PT_tools_grease_pencil_interpolate", text="插入")
 
                     elif context.mode == "SCULPT_GPENCIL":
                         row = column.row(align=True)
@@ -304,18 +304,18 @@ class PieModes(Menu):
 
                         r = row.row(align=True)
                         r.active = gpd.use_multiedit
-                        r.popover(panel="VIEW3D_PT_gpencil_multi_frame", text="Multiframe")
+                        r.popover(panel="VIEW3D_PT_gpencil_multi_frame", text="复帧")
 
                 elif active.type == 'EMPTY':
                     # 4 - LEFT
                     if grouppro and active.instance_collection and active.instance_collection.created_with_gp and not active.instance_collection.library:
-                        pie.operator("object.edit_grouppro", text="Edit Group")
+                        pie.operator("object.edit_grouppro", text="编辑群组")
 
                     elif active.instance_collection and active.instance_collection.library:
                         blendpath = abspath(active.instance_collection.library.filepath)
                         library = active.instance_collection.library.name
 
-                        op = pie.operator("machin3.open_library_blend", text="Open %s" % (os.path.basename(blendpath)))
+                        op = pie.operator("machin3.open_library_blend", text="打开 %s" % (os.path.basename(blendpath)))
                         op.blendpath = blendpath
                         op.library = library
 
@@ -336,7 +336,7 @@ class PieModes(Menu):
 
                     # 8 - TOP
                     if grouppro and len(context.scene.storedGroupSettings):
-                        pie.operator("object.close_grouppro", text="Close Group")
+                        pie.operator("object.close_grouppro", text="关闭群组 ")
 
                     else:
                         pie.separator()
@@ -490,7 +490,7 @@ class PieModes(Menu):
 
             # 8 - TOP
             if grouppro and len(context.scene.storedGroupSettings):
-                pie.operator("object.close_grouppro", text="Close Group")
+                pie.operator("object.close_grouppro", text="关闭群组")
 
             else:
                 pie.separator()
@@ -519,13 +519,13 @@ class PieModes(Menu):
         # group pro "object mode"
         if len(context.scene.storedGroupSettings) == 0:
             row = column.split(factor=0.7, align=True)
-            row.operator("wm.call_menu_pie", text="GroupPro", icon='STICKY_UVS_LOC').name = "GP_MT_grouppro_main_pie"
+            row.operator("wm.call_menu_pie", text="GroupPro插件", icon='STICKY_UVS_LOC').name = "GP_MT_grouppro_main_pie"
             row.operator("object.create_grouppro", text="Create")
 
         # group pro "edit mode"
         else:
             row = column.row()
-            row.operator("wm.call_menu_pie", text="GroupPro", icon='STICKY_UVS_LOC').name = "GP_MT_grouppro_main_pie"
+            row.operator("wm.call_menu_pie", text="GroupPro插件", icon='STICKY_UVS_LOC').name = "GP_MT_grouppro_main_pie"
 
             if addremove:
                 r = row.row(align=True)
@@ -595,7 +595,7 @@ class PieModes(Menu):
 
 class PieSave(Menu):
     bl_idname = "MACHIN3_MT_save_pie"
-    bl_label = "保存，打开，追加"
+    bl_label = "保存, 打开, 追加"
 
     def draw(self, context):
         layout = self.layout
@@ -647,14 +647,14 @@ class PieSave(Menu):
 
         row = col.row(align=True)
         row.scale_y = 1.5
-        row.operator("machin3.load_most_recent", text="恢复最近的一次工程", icon_value=get_icon('open_recent'))
+        row.operator("machin3.load_most_recent", text="(R) 最近的", icon_value=get_icon('open_recent'))
         # row.operator("wm.call_menu", text="All Recent", icon_value=get_icon('open_recent')).name = "INFO_MT_file_open_recent"
-        row.operator("wm.call_menu", text="打开最近", icon_value=get_icon('open_recent')).name = "TOPBAR_MT_file_open_recent"
+        row.operator("wm.call_menu", text="全部最近的", icon_value=get_icon('open_recent')).name = "TOPBAR_MT_file_open_recent"
 
         col.separator()
-        col.operator("wm.recover_auto_save", text="恢复到自动存档文件...", icon_value=get_icon('recover_auto_save'))
+        col.operator("wm.recover_auto_save", text="恢复自动保存的...", icon_value=get_icon('recover_auto_save'))
         # col.operator("wm.recover_last_session", text="Recover Last Session", icon='RECOVER_LAST')
-        col.operator("wm.revert_mainfile", text="还原", icon_value=get_icon('revert'))
+        col.operator("wm.revert_mainfile", text="恢复", icon_value=get_icon('revert'))
 
     def draw_center_column_top(self, context, col):
         row = col.split(factor=0.25)
@@ -672,8 +672,8 @@ class PieSave(Menu):
     def draw_center_column_bottom(self, col):
         row = col.split(factor=0.5)
         row.scale_y = 1.25
-        row.operator("machin3.load_previous", text="上一个", icon_value=get_icon('open_previous'))
-        row.operator("machin3.load_next", text="下一个", icon_value=get_icon('open_next'))
+        row.operator("machin3.load_previous", text="载入上一个", icon_value=get_icon('open_previous'))
+        row.operator("machin3.load_next", text="载入下一个", icon_value=get_icon('open_next'))
 
     def draw_right_column(self, col):
         row = col.row()
@@ -709,7 +709,7 @@ class PieSave(Menu):
 
 class PieShading(Menu):
     bl_idname = "MACHIN3_MT_shading_pie"
-    bl_label = "着色和遮罩"
+    bl_label = "着色和覆盖"
 
     def draw(self, context):
         layout = self.layout
@@ -764,7 +764,7 @@ class PieShading(Menu):
 
     def draw_left_column(self, context, view, col):
         row = col.split(factor=0.45)
-        row.operator("machin3.toggle_grid", text="栅格显隐", icon="GRID")
+        row.operator("machin3.toggle_grid", text="栅栏格显隐", icon="GRID")
         r = row.split().row(align=True)
         r.active = view.overlay.show_floor
         r.prop(view.overlay, "show_axis_x", text="X", toggle=True)
@@ -775,14 +775,14 @@ class PieShading(Menu):
         row = col.split(factor=0.45)
 
         icon = get_icon('wireframe_overlay') if view.overlay.show_wireframes else get_icon('wireframe')
-        row.operator("machin3.toggle_wireframe", text="线框显隐", icon_value=icon)
+        row.operator("machin3.toggle_wireframe", text="细分线显隐", icon_value=icon)
 
         # TODO: use depress argument, see https://blenderartists.org/t/machin3tools/1135716/398
 
         r = row.split().row()
         if context.mode == "OBJECT":
             r.active = view.overlay.show_wireframes
-            r.prop(view.overlay, "wireframe_threshold", text="线框")
+            r.prop(view.overlay, "wireframe_threshold", text="细分线")
         elif context.mode == "EDIT_MESH":
             r.active = view.shading.show_xray
             r.prop(view.shading, "xray_alpha", text="X-Ray")
@@ -794,7 +794,7 @@ class PieShading(Menu):
         # cavity
 
         row = col.split(factor=0.45)
-        row.operator("machin3.toggle_cavity", text="空腔显隐")
+        row.operator("machin3.toggle_cavity", text="使用Cavity着色")
         r = row.row(align=True)
         # r.prop(view.shading, "cavity_ridge_factor", text="")
 
@@ -805,7 +805,7 @@ class PieShading(Menu):
         # curvature
 
         row = col.split(factor=0.45)
-        row.operator("machin3.toggle_curvature", text="(V) 曲率显隐")
+        row.operator("machin3.toggle_curvature", text="(V)使用Curvature着色")
         r = row.row(align=True)
         r.active = view.shading.show_cavity and view.shading.cavity_type in ['SCREEN', 'BOTH']
         r.prop(view.shading, "curvature_ridge_factor", text="")
@@ -828,7 +828,7 @@ class PieShading(Menu):
                 col.separator()
                 row = col.split(factor=0.55)
                 r = row.split().row(align=True)
-                r.operator("machin3.shade_smooth", text="光滑", icon_value=get_icon('smooth'))
+                r.operator("machin3.shade_smooth", text="平滑", icon_value=get_icon('smooth'))
                 r.operator("machin3.shade_flat", text="平直", icon_value=get_icon('flat'))
 
                 icon = "CHECKBOX_HLT" if mesh.use_auto_smooth else "CHECKBOX_DEHLT"
@@ -856,7 +856,7 @@ class PieShading(Menu):
 
                     r = row.row(align=True)
                     r.active = view.overlay.show_vertex_normals or view.overlay.show_face_normals or view.overlay.show_split_normals
-                    r.prop(view.overlay, "normals_length", text="Size")
+                    r.prop(view.overlay, "normals_length", text="尺寸")
 
 
         if context.mode == "EDIT_MESH":
@@ -869,16 +869,16 @@ class PieShading(Menu):
             row.prop(view.overlay, "show_edge_crease", text="折痕", toggle=True)
             row.prop(view.overlay, "show_edge_sharp", text="锐边", toggle=True)
             row.prop(view.overlay, "show_edge_bevel_weight", text="倒角", toggle=True)
-            row.prop(view.overlay, "show_edge_seams", text="接缝", toggle=True)
+            row.prop(view.overlay, "show_edge_seams", text="缝合边", toggle=True)
 
             if not bpy.app.build_options.freestyle:
-                row.prop(view.overlay, "show_edge_seams", text="接缝", toggle=True)
+                row.prop(view.overlay, "show_edge_seams", text="缝合边", toggle=True)
 
     def draw_center_column(self, context, view, col):
         row = col.split(factor=0.42)
-        row.prop(view.overlay, "show_cursor", text="3D 游标")
+        row.prop(view.overlay, "show_cursor", text="3D游标")
         r = row.split().row(align=True)
-        r.prop(view.overlay, "show_object_origins", text="原心")
+        r.prop(view.overlay, "show_object_origins", text="原点")
         r.prop(view.overlay, "show_object_origins_all", text="全部")
 
         col.separator()
@@ -901,9 +901,9 @@ class PieShading(Menu):
             row.prop(active, "display_type", text="")
 
             row = col.row()
-            row.prop(active, "show_name", text="名称")
-            row.prop(active, "show_axis", text="轴向")
-            row.prop(active, "show_in_front", text="显示在最前")
+            row.prop(active, "show_name", text="对象名称显隐")
+            row.prop(active, "show_axis", text="轴向标识显隐")
+            row.prop(active, "show_in_front", text="向前")
             row.prop(active, "color", text="")
 
     def draw_right_column(self, context, view, col):
@@ -926,8 +926,8 @@ class PieShading(Menu):
             # switch matcap
             if view.shading.light == "MATCAP":
                 row = col.row()
-                row.operator("machin3.matcap_switch", text="(X) 材质捕获开关")
-                row.operator('view3d.toggle_matcap_flip', text="材质捕获翻转", icon='ARROW_LEFTRIGHT')
+                row.operator("machin3.matcap_switch", text="(X) Matcap着色开关")
+                row.operator('view3d.toggle_matcap_flip', text="Matcap着色翻转", icon='ARROW_LEFTRIGHT')
 
             # color type
             row = col.row(align=True)
@@ -943,9 +943,9 @@ class PieShading(Menu):
             elif view.shading.color_type == 'OBJECT':
                 r = col.split(factor=0.12, align=True)
                 r.label(text="from")
-                r.operator("machin3.colorize_objects_from_active", text='来自活动', icon='OBJECT_DATA')
-                r.operator("machin3.colorize_objects_from_materials", text='来自材质', icon='MATERIAL')
-                r.operator("machin3.colorize_objects_from_collections", text='来自收藏', icon='OUTLINER_OB_GROUP_INSTANCE')
+                r.operator("machin3.colorize_objects_from_active", text='激活', icon='OBJECT_DATA')
+                r.operator("machin3.colorize_objects_from_materials", text='材质', icon='MATERIAL')
+                r.operator("machin3.colorize_objects_from_collections", text='集合', icon='OUTLINER_OB_GROUP_INSTANCE')
 
         elif view.shading.type == "MATERIAL":
 
@@ -989,10 +989,10 @@ class PieShading(Menu):
                                         strength = node.inputs['Strength']
 
                                         if color.links:
-                                            col.prop(strength, "default_value", text="Background Strength")
+                                            col.prop(strength, "default_value", text="背景强度")
                                         else:
                                             row = col.split(factor=0.7)
-                                            row.prop(strength, "default_value", text="Background Strength")
+                                            row.prop(strength, "default_value", text="背景强度")
                                             row.prop(color, "default_value", text="")
 
                                         col.separator()
@@ -1002,7 +1002,7 @@ class PieShading(Menu):
             col.prop(context.scene.render, "engine")
 
             if context.scene.render.engine == "CYCLES":
-                col.label(text='TODO: render setting presets')
+                col.label(text='TODO: 渲染设置预设')
                 col.label(text='TODO: pack images op?')
 
             if context.scene.render.engine == "BLENDER_EEVEE":
@@ -1190,26 +1190,26 @@ class PieViews(Menu):
 
         row = col.row()
         row.scale_y = 1.5
-        row.operator("machin3.smart_view_cam", text="智能视图摄像机", icon='HIDE_OFF')
+        row.operator("machin3.smart_view_cam", text="智能摄像机视图", icon='HIDE_OFF')
 
         if view.region_3d.view_perspective == 'CAMERA':
             cams = [obj for obj in scene.objects if obj.type == "CAMERA"]
 
             if len(cams) > 1:
                 row = col.row()
-                row.operator("machin3.next_cam", text="(Q) 上一个摄像机").previous = True
-                row.operator("machin3.next_cam", text="(W) 下一个摄像机").previous = False
+                row.operator("machin3.next_cam", text="(Q) 上个摄像机").previous = True
+                row.operator("machin3.next_cam", text="(W) 下个摄像机").previous = False
 
 
         row = col.split()
-        row.operator("machin3.make_cam_active", text="激活")
+        row.operator("machin3.make_cam_active", text="激活摄像机")
         row.prop(scene, "camera", text="")
 
 
         row = col.split()
-        row.operator("view3d.camera_to_view", text="摄像机视图", icon='VIEW_CAMERA')
+        row.operator("view3d.camera_to_view", text="摄像机调整到当前视角", icon='VIEW_CAMERA')
 
-        text, icon = ("从视图中解锁", "UNLOCKED") if view.lock_camera else ("锁定视图", "LOCKED")
+        text, icon = ("解锁视图位置", "UNLOCKED") if view.lock_camera else ("锁定到视图", "LOCKED")
         row.operator("wm.context_toggle", text=text, icon=icon).data_path = "space_data.lock_camera"
 
     def draw_center_column(self, col):
@@ -1274,12 +1274,12 @@ class PieAlign(Menu):
         """
 
         # 4 - LEFT
-        op = pie.operator("machin3.align_editmesh", text="Y 最小值")
+        op = pie.operator("machin3.align_editmesh", text="Y轴最小值对齐")
         op.axis = "Y"
         op.type = "MIN"
 
         # 6 - RIGHT
-        op = pie.operator("machin3.align_editmesh", text="Y 最大值")
+        op = pie.operator("machin3.align_editmesh", text="Y轴最大值对齐")
         op.axis = "Y"
         op.type = "MAX"
 
@@ -1374,22 +1374,22 @@ class PieAlign(Menu):
 
 
         # 7 - TOP - LEFT
-        op = pie.operator("machin3.align_editmesh", text="X 最小值")
+        op = pie.operator("machin3.align_editmesh", text="X轴最小值对齐")
         op.axis = "X"
         op.type = "MIN"
 
         # 9 - TOP - RIGHT
-        op = pie.operator("machin3.align_editmesh", text="X 最大值")
+        op = pie.operator("machin3.align_editmesh", text="X轴最大值对齐")
         op.axis = "X"
         op.type = "MAX"
 
         # 1 - BOTTOM - LEFT
-        op = pie.operator("machin3.align_editmesh", text="Z 最小值")
+        op = pie.operator("machin3.align_editmesh", text="Z轴最小值对齐")
         op.axis = "Z"
         op.type = "MIN"
 
         # 3 - BOTTOM - RIGHT
-        op = pie.operator("machin3.align_editmesh", text="Z 最大值")
+        op = pie.operator("machin3.align_editmesh", text="Z轴最大值对齐")
         op.axis = "Z"
         op.type = "MAX"
 
@@ -1399,22 +1399,22 @@ class PieAlign(Menu):
         """
 
         # 4 - LEFT
-        op = pie.operator("machin3.align_editmesh", text="左")
+        op = pie.operator("machin3.align_editmesh", text="向左对齐")
         op.type = "MINMAX"
         op.direction = "LEFT"
 
         # 6 - RIGHT
-        op = pie.operator("machin3.align_editmesh", text="右")
+        op = pie.operator("machin3.align_editmesh", text="向右对齐")
         op.type = "MINMAX"
         op.direction = "RIGHT"
 
         # 2 - BOTTOM
-        op = pie.operator("machin3.align_editmesh", text="Bottom")
+        op = pie.operator("machin3.align_editmesh", text="向下对齐")
         op.type = "MINMAX"
         op.direction = "BOTTOM"
 
         # 2 - TOP
-        op = pie.operator("machin3.align_editmesh", text="Top")
+        op = pie.operator("machin3.align_editmesh", text="向上对齐")
         op.type = "MINMAX"
         op.direction = "TOP"
 
@@ -1454,12 +1454,12 @@ class PieAlign(Menu):
             row = column.split(factor=0.25)
             row.scale_y = 1.2
             row.separator()
-            row.operator("machin3.align_object_to_vert", text="对齐到垂直")
+            row.operator("machin3.align_object_to_vert", text="对齐到顶点")
 
             row = column.split(factor=0.25)
             row.scale_y = 1.2
             row.separator()
-            row.operator("machin3.align_object_to_edge", text="对齐到边缘")
+            row.operator("machin3.align_object_to_edge", text="对齐到边")
 
 
         # 3 - BOTTOM - RIGHT
@@ -1472,10 +1472,10 @@ class PieAlign(Menu):
 
         r = row.row(align=True)
         r.scale_y = 1.2
-        op = r.operator("machin3.align_editmesh", text="Horizontal")
+        op = r.operator("machin3.align_editmesh", text="水平")
         op.type = "ZERO"
         op.direction = "HORIZONTAL"
-        op = r.operator("machin3.align_editmesh", text="Vertical")
+        op = r.operator("machin3.align_editmesh", text="垂直")
         op.type = "ZERO"
         op.direction = "VERTICAL"
 
@@ -1485,10 +1485,10 @@ class PieAlign(Menu):
 
         r = row.row(align=True)
         row.scale_y = 1.2
-        op = r.operator("machin3.align_editmesh", text="Horizontal")
+        op = r.operator("machin3.align_editmesh", text="水平")
         op.type = "AVERAGE"
         op.direction = "HORIZONTAL"
-        op = r.operator("machin3.align_editmesh", text="Vertical")
+        op = r.operator("machin3.align_editmesh", text="垂直")
         op.type = "AVERAGE"
         op.direction = "VERTICAL"
 
@@ -1498,10 +1498,10 @@ class PieAlign(Menu):
 
         r = row.row(align=True)
         row.scale_y = 1.2
-        op = r.operator("machin3.align_editmesh", text="Horizontal")
+        op = r.operator("machin3.align_editmesh", text="水平")
         op.type = "CURSOR"
         op.direction = "HORIZONTAL"
-        op = r.operator("machin3.align_editmesh", text="Vertical")
+        op = r.operator("machin3.align_editmesh", text="垂直")
         op.type = "CURSOR"
         op.direction = "VERTICAL"
 
@@ -1617,10 +1617,10 @@ class PieUVAlign(Menu):
 
         r = row.row(align=True)
         row.scale_y = 1.2
-        op = r.operator("machin3.align_uv", text="Horizontal")
+        op = r.operator("machin3.align_uv", text="水平")
         op.type = "CURSOR"
         op.axis = "U"
-        op = r.operator("machin3.align_uv", text="Vertical")
+        op = r.operator("machin3.align_uv", text="垂直")
         op.type = "CURSOR"
         op.axis = "V"
 
@@ -1635,10 +1635,10 @@ class PieCursor(Menu):
 
 
         # 4 - LEFT
-        pie.operator("machin3.cursor_to_origin", text="to Origin", icon="PIVOT_CURSOR")
+        pie.operator("machin3.cursor_to_origin", text="游标对齐到原点", icon="PIVOT_CURSOR")
 
         # 6 - RIGHT
-        pie.operator("view3d.snap_selected_to_cursor", text="to Cursor", icon="RESTRICT_SELECT_OFF").use_offset = False
+        pie.operator("view3d.snap_selected_to_cursor", text="对象对齐到游标", icon="RESTRICT_SELECT_OFF").use_offset = False
 
         # 2 - BOTTOM
 
@@ -1657,14 +1657,14 @@ class PieCursor(Menu):
 
             row = column.split(factor=0.5)
             row.scale_y = 1.5
-            row.operator("object.origin_set", text="to Cursor", icon="LAYER_ACTIVE").type = "ORIGIN_CURSOR"
-            row.operator("object.origin_set", text="to Geometry", icon="OBJECT_ORIGIN").type = "ORIGIN_GEOMETRY"
+            row.operator("object.origin_set", text="对齐到游标", icon="LAYER_ACTIVE").type = "ORIGIN_CURSOR"
+            row.operator("object.origin_set", text="对齐到几何体", icon="OBJECT_ORIGIN").type = "ORIGIN_GEOMETRY"
 
             row = column.split(factor=0.20)
             row.scale_y = 1.5
             row.separator()
             r = row.split(factor=0.7)
-            r.operator("machin3.origin_to_active", text="to Active", icon="TRANSFORM_ORIGINS")
+            r.operator("machin3.origin_to_active", text="对齐到激活对象", icon="TRANSFORM_ORIGINS")
 
 
         else:
@@ -1674,21 +1674,21 @@ class PieCursor(Menu):
         pie.separator()
 
         # 7 - TOP - LEFT
-        pie.operator("machin3.cursor_to_selected", text="to Selected", icon="PIVOT_CURSOR")
+        pie.operator("machin3.cursor_to_selected", text="游标对齐到所选", icon="PIVOT_CURSOR")
 
         # 9 - TOP - RIGHT
-        pie.operator("view3d.snap_selected_to_cursor", text="to Cursor, Offset", icon="RESTRICT_SELECT_OFF").use_offset = True
+        pie.operator("view3d.snap_selected_to_cursor", text="所选对齐到游标（偏移）", icon="RESTRICT_SELECT_OFF").use_offset = True
 
         # 1 - BOTTOM - LEFT
-        pie.operator("view3d.snap_cursor_to_grid", text="to Grid", icon="PIVOT_CURSOR")
+        pie.operator("view3d.snap_cursor_to_grid", text="游标就近对齐栅栏格", icon="PIVOT_CURSOR")
 
         # 3 - BOTTOM - RIGHT
-        pie.operator("view3d.snap_selected_to_grid", text="to Grid", icon="RESTRICT_SELECT_OFF")
+        pie.operator("view3d.snap_selected_to_grid", text="游标就近对齐栅栏格", icon="RESTRICT_SELECT_OFF")
 
 
 class PieTransform(Menu):
     bl_idname = "MACHIN3_MT_transform_pie"
-    bl_label = "Transform"
+    bl_label = "变换"
 
     def draw(self, context):
         layout = self.layout
@@ -1697,17 +1697,17 @@ class PieTransform(Menu):
         scene = context.scene
 
         # 4 - LEFT
-        op = pie.operator('machin3.set_transform_preset', text='Local')
+        op = pie.operator('machin3.set_transform_preset', text='本地')
         op.pivot = 'MEDIAN_POINT'
         op.orientation = 'LOCAL'
 
         # 6 - RIGHT
-        op = pie.operator('machin3.set_transform_preset', text='Global')
+        op = pie.operator('machin3.set_transform_preset', text='全局')
         op.pivot = 'MEDIAN_POINT'
         op.orientation = 'GLOBAL'
 
         # 2 - BOTTOM
-        op = pie.operator('machin3.set_transform_preset', text='Active')
+        op = pie.operator('machin3.set_transform_preset', text='激活对象')
         op.pivot = 'ACTIVE_ELEMENT'
         op.orientation = 'NORMAL' if context.mode == 'EDIT_MESH' else 'LOCAL'
 
@@ -1736,12 +1736,12 @@ class PieTransform(Menu):
         pie.separator()
 
         # 1 - BOTTOM - LEFT
-        op = pie.operator('machin3.set_transform_preset', text='Individual')
+        op = pie.operator('machin3.set_transform_preset', text='独立')
         op.pivot = 'INDIVIDUAL_ORIGINS'
         op.orientation = 'NORMAL' if context.mode == 'EDIT_MESH' else 'LOCAL'
 
         # 3 - BOTTOM - RIGHT
-        op = pie.operator('machin3.set_transform_preset', text='Cursor')
+        op = pie.operator('machin3.set_transform_preset', text='游标')
         # op.pivot = 'MEDIAN_POINT'
         op.pivot = 'CURSOR'
         op.orientation = 'CURSOR'
@@ -1800,7 +1800,7 @@ class PieTransform(Menu):
 
 class PieCollections(Menu):
     bl_idname = "MACHIN3_MT_collections_pie"
-    bl_label = "Collections"
+    bl_label = "集合"
 
     def draw(self, context):
         sel = context.selected_objects
@@ -1839,14 +1839,14 @@ class PieCollections(Menu):
 
         # 4 - LEFT
         if sel:
-            pie.operator("machin3.remove_from_collection", text="Remove from", icon="REMOVE")
+            pie.operator("machin3.remove_from_collection", text="移除", icon="REMOVE")
 
         else:
             pie.separator()
 
         # 6 - RIGHT
         if sel:
-            pie.operator("machin3.add_to_collection", text="Add to", icon="ADD")
+            pie.operator("machin3.add_to_collection", text="添加到", icon="ADD")
 
         else:
             pie.separator()
@@ -1854,10 +1854,10 @@ class PieCollections(Menu):
 
         # 2 - BOTTOM
         if sel:
-            pie.operator("machin3.move_to_collection", text="Move to")
+            pie.operator("machin3.move_to_collection", text="移动到")
 
         else:
-            pie.operator("machin3.create_collection", text="Create", icon="GROUP")
+            pie.operator("machin3.create_collection", text="创建", icon="GROUP")
 
         # 8 - TOP
 
@@ -1970,7 +1970,7 @@ class PieCollections(Menu):
 
         row = column.row()
         row.scale_y = 1.5
-        row.operator("machin3.purge_collections", text="Purge", icon='MONKEY')
+        row.operator("machin3.purge_collections", text="清除空集合", icon='MONKEY')
 
     def draw_left_bottom_column(self, context, layout):
         m3 = context.scene.M3
@@ -1980,18 +1980,18 @@ class PieCollections(Menu):
         column.label(text="GroupPro")
 
         row = column.row()
-        row.prop(m3, "grouppro_dotnames", text=".hide", icon_only=True)
-        row.operator("object.gpro_cleanup", text="Cleanup")
+        row.prop(m3, "grouppro_dotnames", text=".隐藏", icon_only=True)
+        row.operator("object.gpro_cleanup", text="清理")
 
         row = column.row()
-        row.operator("machin3.sort_grouppro_groups", text="Sort Groups")
+        row.operator("machin3.sort_grouppro_groups", text="群组排序")
 
     def draw_center_column(self, context, batchops, sel, collections, layout):
         if sel:
-            layout.label(text="Scene Collections (Selection)")
+            layout.label(text="场景集合 (选择)")
 
         else:
-            layout.label(text="Scene Collections")
+            layout.label(text="场景集合")
 
         if len(collections) <= 5:
             column = layout.column(align=True)
@@ -2050,10 +2050,10 @@ class PieCollections(Menu):
 
     def draw_right_top_column(self, context, batchops, sel, collections, layout):
         if sel:
-            layout.label(text="Decal Parent Collections (Selection)")
+            layout.label(text="贴花父级集合 (选择)")
 
         else:
-            layout.label(text="Decal Parent Collections")
+            layout.label(text="贴花父级集合")
 
 
         if len(collections) <= 5:
@@ -2112,7 +2112,7 @@ class PieCollections(Menu):
                     row.operator("batch_ops_collections.contextual_click", text="", icon="GROUP").idname = col.name
 
     def draw_right_bottom_column(self, context, layout):
-        layout.label(text="Decal Type Collections")
+        layout.label(text="贴花类型集合")
 
         row = layout.row(align=True)
 
@@ -2135,33 +2135,33 @@ class PieCollections(Menu):
         row.prop(decals, "hide_viewport", text="", icon="HIDE_OFF")
 
         if simple and simple.DM.isdecaltypecol and simple.objects:
-            row.operator("machin3.select_collection", text="Simple").name = simplename
+            row.operator("machin3.select_collection", text="简单").name = simplename
             row.prop(simple, "hide_viewport", text="", icon="HIDE_OFF")
         else:
-            row.label(text="Simple")
+            row.label(text="简单")
 
         if subset and subset.DM.isdecaltypecol and subset.objects:
-            row.operator("machin3.select_collection", text="Subset").name = subsetname
+            row.operator("machin3.select_collection", text="子集").name = subsetname
             row.prop(subset, "hide_viewport", text="", icon="HIDE_OFF")
         else:
-            row.label(text="Subset")
+            row.label(text="子集")
 
         if panel and panel.DM.isdecaltypecol and panel.objects:
-            row.operator("machin3.select_collection", text="Panel").name = panelname
+            row.operator("machin3.select_collection", text="面板").name = panelname
             row.prop(panel, "hide_viewport", text="", icon="HIDE_OFF")
         else:
-            row.label(text="Panel")
+            row.label(text="面板")
 
         if info and info.DM.isdecaltypecol and info.objects:
-            row.operator("machin3.select_collection", text="Info").name = infoname
+            row.operator("machin3.select_collection", text="信息").name = infoname
             row.prop(info, "hide_viewport", text="", icon="HIDE_OFF")
         else:
-            row.label(text="Info")
+            row.label(text="信息")
 
 
 class PieWorkspace(Menu):
     bl_idname = "MACHIN3_MT_workspace_pie"
-    bl_label = "Workspaces"
+    bl_label = "工作空间"
 
     def draw(self, context):
         layout = self.layout
@@ -2171,7 +2171,7 @@ class PieWorkspace(Menu):
         pie.operator("machin3.switch_workspace", text="MACHIN3", icon='VIEW3D').name="General"
 
         # 6 - RIGHT
-        # pie.operator("machin3.switch_workspace", text="Compositing", icon='NODE_COMPOSITING').name="Compositing"
+        # pie.operator("machin3.switch_workspace", text="合成处理", icon='NODE_COMPOSITING').name="Compositing"
         pie.separator()
 
         # 2 - BOTTOM
@@ -2190,4 +2190,4 @@ class PieWorkspace(Menu):
         pie.separator()
 
         # 3 - BOTTOM - RIGHT
-        pie.operator("machin3.switch_workspace", text="Video", icon='FILE_MOVIE').name="Video"
+        pie.operator("machin3.switch_workspace", text="视频", icon='FILE_MOVIE').name="Video"

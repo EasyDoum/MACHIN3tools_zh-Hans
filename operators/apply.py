@@ -11,8 +11,8 @@ from .. utils.math import flatten_matrix, get_loc_matrix, get_rot_matrix, get_sc
 
 class Apply(bpy.types.Operator):
     bl_idname = "machin3.apply_transformations"
-    bl_label = "MACHIN3: Apply Transformations"
-    bl_description = "Apply Transformations while keeping the bevel width as well as the child transformations unchanged."
+    bl_label = "MACHIN3: 应用变换"
+    bl_description = "应用变换,同时保持倒角的宽度和子变换不变."
     bl_options = {'REGISTER', 'UNDO'}
 
     scale: BoolProperty(name="Scale", default=True)

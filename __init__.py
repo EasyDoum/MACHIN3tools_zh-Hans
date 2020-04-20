@@ -1,10 +1,10 @@
 bl_info = {
-    "name": "MACHIN3tools",
+    "name": "MACHIN3tools(BG2CSE汉化版)",
     "author": "MACHIN3",
     "version": (0, 3, 14),
     "blender": (2, 81, 0),
     "location": "",
-    "description": "简化 Blender 2.80.",
+    "description": "简化 Blender 2.80及以上版本",
     "warning": "",
     "wiki_url": "https://machin3.io/MACHIN3tools/docs",
     "category": "Mesh"}

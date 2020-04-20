@@ -6,13 +6,13 @@ from math import radians
 
 class QuadSphere(bpy.types.Operator):
     bl_idname = "machin3.quadsphere"
-    bl_label = "MACHIN3: Quadsphere"
-    bl_description = "Creates a Quadsphere"
+    bl_label = "MACHIN3: 四边球"
+    bl_description = "创建一个四边球"
     bl_options = {'REGISTER', 'UNDO'}
 
-    subdivisions: IntProperty(name='Subdivisions', default=4, min=1, max=8)
+    subdivisions: IntProperty(name='细分', default=4, min=1, max=8)
 
-    align_rotation: BoolProperty(name="Align Rotation", default=True)
+    align_rotation: BoolProperty(name="对齐旋转", default=True)
 
     def draw(self, context):
         layout = self.layout

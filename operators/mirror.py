@@ -8,16 +8,16 @@ decalmachine = None
 
 class Mirror(bpy.types.Operator):
     bl_idname = "machin3.mirror"
-    bl_label = "MACHIN3: 镜射"
+    bl_label = "MACHIN3: 镜像"
     bl_options = {'REGISTER', 'UNDO'}
 
     use_x: BoolProperty(name="X", default=True)
     use_y: BoolProperty(name="Y", default=False)
     use_z: BoolProperty(name="Z", default=False)
 
-    bisect_x: BoolProperty(name="对分", default=False)
-    bisect_y: BoolProperty(name="对分", default=False)
-    bisect_z: BoolProperty(name="对分", default=False)
+    bisect_x: BoolProperty(name="均分", default=False)
+    bisect_y: BoolProperty(name="均分", default=False)
+    bisect_z: BoolProperty(name="均分", default=False)
 
     flip_x: BoolProperty(name="翻转", default=False)
     flip_y: BoolProperty(name="翻转", default=False)
@@ -130,7 +130,7 @@ class Mirror(bpy.types.Operator):
             context.view_layer.objects.active = active
 
     def mirror_mesh_obj(self, context, obj, active=None):
-        mirror = obj.modifiers.new(name="Mirror", type="MIRROR")
+        mirror = obj.modifiers.new(name="镜像", type="MIRROR")
         mirror.use_axis = (self.use_x, self.use_y, self.use_z)
         mirror.use_bisect_axis = (self.bisect_x, self.bisect_y, self.bisect_z)
         mirror.use_bisect_flip_axis = (self.flip_x, self.flip_y, self.flip_z)
@@ -188,8 +188,8 @@ class Mirror(bpy.types.Operator):
 
 class Unmirror(bpy.types.Operator):
     bl_idname = "machin3.unmirror"
-    bl_label = "MACHIN3: 非镜像"
-    bl_description = "删除所选对象堆栈中的最后一个修改器"
+    bl_label = "MACHIN3: 取消镜像"
+    bl_description = "从所选对象的修改器中删除最后一个修改器"
     bl_options = {'REGISTER', 'UNDO'}
 
     def draw(self, context):

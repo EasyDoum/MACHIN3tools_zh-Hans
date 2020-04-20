@@ -5,10 +5,10 @@ import bmesh
 
 class SmartFace(bpy.types.Operator):
     bl_idname = "machin3.smart_face"
-    bl_label = "MACHIN3: 智能面"
+    bl_label = "MACHIN3: 智能工具-面"
     bl_options = {'REGISTER', 'UNDO'}
 
-    automerge: BoolProperty(name="合并到点附近", default=True)
+    automerge: BoolProperty(name="合并到附近的顶点", default=True)
 
     def draw(self, context):
         layout = self.layout

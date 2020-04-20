@@ -5,10 +5,10 @@ import bmesh
 
 class SmartEdge(bpy.types.Operator):
     bl_idname = "machin3.smart_edge"
-    bl_label = "MACHIN3: 智能线"
+    bl_label = "MACHIN3: 智能工具-边"
     bl_options = {'REGISTER', 'UNDO'}
 
-    sharp: BoolProperty(name="Toggle Sharp", default=False)
+    sharp: BoolProperty(name="锐边切换", default=False)
 
     def draw(self, context):
         layout = self.layout

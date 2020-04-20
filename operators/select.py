@@ -10,11 +10,11 @@ axis_items = [("0", "X", ""),
 
 class SelectCenterObjects(bpy.types.Operator):
     bl_idname = "machin3.select_center_objects"
-    bl_label = "MACHIN3: Select Center Objects"
-    bl_description = "Selects Objects in the Center, objects, that have verts on both sides of the X, Y or Z axis."
+    bl_label = "MACHIN3: 选择中心对象"
+    bl_description = "选择位于中心的对象,对象,在X，Y或Z轴的两侧都具有顶点."
     bl_options = {'REGISTER', 'UNDO'}
 
-    axis: EnumProperty(name="Axis", items=axis_items, default="0")
+    axis: EnumProperty(name="轴向", items=axis_items, default="0")
 
     def draw(self, context):
         layout = self.layout

@@ -12,12 +12,12 @@ class AppendMatsCollection(bpy.types.PropertyGroup):
 
 class HistoryObjectsCollection(bpy.types.PropertyGroup):
     name: StringProperty()
-    obj: PointerProperty(name="History Object", type=bpy.types.Object)
+    obj: PointerProperty(name="对象历史", type=bpy.types.Object)
 
 
 class HistoryUnmirroredCollection(bpy.types.PropertyGroup):
     name: StringProperty()
-    obj: PointerProperty(name="History Unmirror", type=bpy.types.Object)
+    obj: PointerProperty(name="取消镜像历史", type=bpy.types.Object)
 
 
 class HistoryEpochCollection(bpy.types.PropertyGroup):
@@ -123,16 +123,16 @@ class M3SceneProperties(bpy.types.PropertyGroup):
                 if col.name.startswith("."):
                     col.name = col.name[1:]
 
-    pass_through: BoolProperty(name="Pass Through", default=False, update=update_xray)
-    show_edit_mesh_wire: BoolProperty(name="Show Edit Mesh Wireframe", default=False, update=update_xray)
-    uv_sync_select: BoolProperty(name="Synce Selection", default=False, update=update_uv_sync_select)
+    pass_through: BoolProperty(name="贯穿选择", default=False, update=update_xray)
+    show_edit_mesh_wire: BoolProperty(name="显示编辑网格时的线框", default=False, update=update_xray)
+    uv_sync_select: BoolProperty(name="同步选择", default=False, update=update_uv_sync_select)
 
-    show_cavity: BoolProperty(name="Cavity", default=True, update=update_show_cavity)
-    show_curvature: BoolProperty(name="Curvature", default=False, update=update_show_cavity)
+    show_cavity: BoolProperty(name="Cavity材质", default=True, update=update_show_cavity)
+    show_curvature: BoolProperty(name="Curvature材质", default=False, update=update_show_cavity)
 
     focus_history: CollectionProperty(type=HistoryEpochCollection)
 
-    grouppro_dotnames: BoolProperty(name=".dotname GroupPro collections", default=False, update=update_grouppro_dotnames)
+    grouppro_dotnames: BoolProperty(name=".dotname GroupPro集合", default=False, update=update_grouppro_dotnames)
 
     def update_eevee_preset(self, context):
         eevee = context.scene.eevee
@@ -193,4 +193,4 @@ class M3SceneProperties(bpy.types.PropertyGroup):
     object_axes_size: FloatProperty(name="Object Axes Size", default=0.3, min=0)
     object_axes_alpha: FloatProperty(name="Object Axes Alpha", default=0.75, min=0, max=1)
 
-    align_mode: EnumProperty(name="Align Mode", items=align_mode_items, default="VIEW")
+    align_mode: EnumProperty(name="对齐模式", items=align_mode_items, default="VIEW")

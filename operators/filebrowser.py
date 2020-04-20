@@ -5,8 +5,8 @@ from .. utils.system import abspath, open_folder
 
 class Open(bpy.types.Operator):
     bl_idname = "machin3.filebrowser_open"
-    bl_label = "MACHIN3: Open in System's filebrowser"
-    bl_description = "Open the current location in the System's own filebrowser"
+    bl_label = "MACHIN3: 在系统文件浏览器中打开"
+    bl_description = "在系统原生文件浏览器中打开当前位置"
 
     path: StringProperty(name="Path")
 

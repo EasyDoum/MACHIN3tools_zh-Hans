@@ -3,14 +3,14 @@ from bpy.props import FloatProperty, BoolProperty, EnumProperty
 from .. utils.property import step_enum
 
 
-state_items = [("MIN", "Minimum", ""),
-               ("MED", "Medium", ""),
-               ("MAX", "Maximum", "")]
+state_items = [("MIN", "最小值", ""),
+               ("MED", "中间值", ""),
+               ("MAX", "最大值", "")]
 
 
 class ClippingToggle(bpy.types.Operator):
     bl_idname = "machin3.clipping_toggle"
-    bl_label = "MACHIN3: 剪切切换"
+    bl_label = "MACHIN3: 视图剪切切换"
     bl_options = {'REGISTER', 'UNDO'}
 
     def update_clip_start_maximum(self, context):
@@ -94,7 +94,7 @@ class ClippingToggle(bpy.types.Operator):
     medium: FloatProperty(name="中间值", default=0.1, min=0, precision=3, step=1, update=update_clip_start_medium)
     minimum: FloatProperty(name="最小值", default=0.001, min=0, precision=5, step=0.001, update=update_clip_start_minimum)
 
-    state: EnumProperty(name="Current State", items=state_items, default="MED", update=update_state)
+    state: EnumProperty(name="当前状态", items=state_items, default="MED", update=update_state)
     reset: BoolProperty(default=False, update=update_reset)
 
     avoid_execute: BoolProperty(default=False)
@@ -118,7 +118,7 @@ class ClippingToggle(bpy.types.Operator):
         row.prop(self, "reset", text="", icon="LOOP_BACK")
 
         row = col.row(align=True)
-        row.label(text="Current")
+        row.label(text="当前")
         row.label(text=str(round(view.clip_start, 6)))
 
     def execute(self, context):

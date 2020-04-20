@@ -6,10 +6,10 @@ from .. utils.math import get_loc_matrix, get_rot_matrix, get_sca_matrix
 
 # TODO: bone support? Make sure to activate. Make sure to have scene.tool_settings.lock_object_modes disabled
 
-modeitems = [("ORIGIN", "Origin", ""),
-             ("CURSOR", "Cursor", ""),
-             ("ACTIVE", "到活动项", ""),
-             ("FLOOR", "到地面（基面）", "")]
+modeitems = [("ORIGIN", "原点", ""),
+             ("CURSOR", "游标", ""),
+             ("ACTIVE", "激活对象", ""),
+             ("FLOOR", "栅栏格", "")]
 
 
 class Align(bpy.types.Operator):
@@ -42,7 +42,7 @@ class Align(bpy.types.Operator):
         column = layout.column()
 
         row = column.split(factor=0.3)
-        row.label(text="Align to")
+        row.label(text="对齐到")
         r = row.row()
         r.prop(self, "mode", expand=True)
 

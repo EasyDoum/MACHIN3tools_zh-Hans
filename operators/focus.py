@@ -10,14 +10,14 @@ from .. items import focus_method_items, focus_levels_items
 
 class Focus(bpy.types.Operator):
     bl_idname = "machin3.focus"
-    bl_label = "MACHIN3: 聚焦"
+    bl_label = "MACHIN3: 对焦"
     bl_options = {'REGISTER', 'UNDO'}
 
-    method: EnumProperty(name="Method", items=focus_method_items, default='VIEW_SELECTED')
+    method: EnumProperty(name="方法", items=focus_method_items, default='VIEW_SELECTED')
 
-    levels: EnumProperty(name="Levels", items=focus_levels_items, description="Switch between single-level Blender native Local View and multi-level MACHIN3 Focus", default="MULTIPLE")
-    unmirror: BoolProperty(name="Un-Mirror", default=True)
-    ignore_mirrors: BoolProperty(name="Ignore Mirrors", default=True)
+    levels: EnumProperty(name="级别", items=focus_levels_items, description="在Blender单一级别的本地局部视图和多级别的MACHIN3焦点之间切换", default="MULTIPLE")
+    unmirror: BoolProperty(name="取消镜像", default=True)
+    ignore_mirrors: BoolProperty(name="忽略镜像", default=True)
 
     def draw(self, context):
         layout = self.layout
@@ -32,7 +32,7 @@ class Focus(bpy.types.Operator):
         # only show tool props when initializing local view, this prevents switching modes and settings while in local view
         elif self.method == 'LOCAL_VIEW' and self.show_tool_props:
             row = column.row()
-            row.label(text="Levels")
+            row.label(text="级别")
             row.prop(self, "levels", expand=True)
 
             column.prop(self, "unmirror", toggle=True)

@@ -7,22 +7,22 @@ from . utils.ui import get_icon
 from . utils.registration import activate, get_path, get_name
 
 
-preferences_tabs = [("GENERAL", "常规", ""),
-                    ("KEYMAPS", "键盘映射", ""),
+preferences_tabs = [("GENERAL", "通用设置", ""),
+                    ("KEYMAPS", "快捷键设置", ""),
                     ("ABOUT", "关于", "")]
 
 
 links = [("Documentation", "https://machin3.io/MACHIN3tools/docs/", "INFO"),
-         ("MACHINƎ.io", "https://machin3.io", "WORLD"),
-         ("Youtube", "https://www.youtube.com/channel/UC4yaFzFDILd2yAqOWRuLOvA", "NONE"),
-         ("Twitter", "https://twitter.com/machin3io", "NONE"),
+         ("MACHINƎ作者官网", "https://machin3.io", "WORLD"),
+         ("Youtube教程", "https://www.youtube.com/channel/UC4yaFzFDILd2yAqOWRuLOvA", "NONE"),
+         ("Twitter推特", "https://twitter.com/machin3io", "NONE"),
          ("", "", ""),
          ("", "", ""),
-         ("DECALmachine", "https://machin3.io/DECALmachine", "NONE"),
-         ("MESHmachine", "https://machin3.io/MESHmachine", "NONE"),
+         ("DECALmachine插件", "https://machin3.io/DECALmachine", "NONE"),
+         ("MESHmachine插件", "https://machin3.io/MESHmachine", "NONE"),
          ("", "", ""),
          ("", "", ""),
-         ("MACHINƎ @ Artstation", "https://www.artstation.com/artist/machin3", "NONE"),
+         ("MACHINƎ @ Artstation地址", "https://www.artstation.com/artist/machin3", "NONE"),
          ("", "", ""),
          ]
 
@@ -168,74 +168,74 @@ class MACHIN3toolsPreferences(bpy.types.AddonPreferences):
 
     # PROPERTIES
 
-    appendworldpath: StringProperty(name="世界环境源 .blend", subtype='FILE_PATH')
-    appendworldname: StringProperty(name="世界环境名称")
+    appendworldpath: StringProperty(name="世界环境的来源 (.blend格式)", subtype='FILE_PATH')
+    appendworldname: StringProperty(name="世界环境的名称")
 
-    appendmatspath: StringProperty(name="材质源 .blend", subtype='FILE_PATH')
+    appendmatspath: StringProperty(name="材质的来源 .blend", subtype='FILE_PATH')
     appendmats: CollectionProperty(type=AppendMatsCollection)
     appendmatsIDX: IntProperty()
-    appendmatsname: StringProperty(name="添加的材质名称", update=update_appendmatsname)
+    appendmatsname: StringProperty(name="追加材质的名称", update=update_appendmatsname)
 
-    switchmatcap1: StringProperty(name="材质捕获 1", update=update_switchmatcap1)
-    switchmatcap2: StringProperty(name="材质捕获 2", update=update_switchmatcap2)
+    switchmatcap1: StringProperty(name="Matcap着色 1", update=update_switchmatcap1)
+    switchmatcap2: StringProperty(name="Matcap着色 2", update=update_switchmatcap2)
 
-    obj_mode_rotate_around_active: BoolProperty(name="围绕选择项旋转，但只在物体模式下", default=False)
-    toggle_cavity: BoolProperty(name="切换 空腔/曲率 在编辑模式下禁用 在物体模式下启用", default=True)
+    obj_mode_rotate_around_active: BoolProperty(name="围绕选择的对象旋转,但仅在对象模式使用", default=False)
+    toggle_cavity: BoolProperty(name="在编辑模式下来回切换Cavity材质/Curvature材质,在对象模式下打开", default=True)
 
-    focus_view_transition: BoolProperty(name="视口过渡运动", default=True)
+    focus_view_transition: BoolProperty(name="视图过渡运动", default=True)
 
     custom_startup: BoolProperty(name="起始场景", default=True)
-    custom_workspaces: BoolProperty(name="工作区", default=False)
+    custom_workspaces: BoolProperty(name="工作空间", default=False)
     custom_theme: BoolProperty(name="主题", default=True)
-    custom_matcaps: BoolProperty(name="材质捕获 (Matcaps) 和默认着色", default=True)
-    custom_overlays: BoolProperty(name="遮罩", default=True)
-    custom_preferences_interface: BoolProperty(name="首选项：界面", default=True)
-    custom_preferences_viewport: BoolProperty(name="首选项：视口", default=True)
-    custom_preferences_navigation: BoolProperty(name="首选项：导航", default=True)
-    custom_preferences_keymap: BoolProperty(name="首选项：键盘映射", default=False, update=update_custom_preferences_keymap)
-    custom_preferences_system: BoolProperty(name="首选项：系统", default=False)
-    custom_preferences_save: BoolProperty(name="首选项：保存和载入", default=True)
+    custom_matcaps: BoolProperty(name="材质捕获 (Matcaps) 着色和默认着色", default=True)
+    custom_overlays: BoolProperty(name="叠加", default=True)
+    custom_preferences_interface: BoolProperty(name="通用设置: 界面", default=True)
+    custom_preferences_viewport: BoolProperty(name="通用设置: 视图", default=True)
+    custom_preferences_navigation: BoolProperty(name="通用设置: 导航", default=True)
+    custom_preferences_keymap: BoolProperty(name="通用设置: 快捷键", default=False, update=update_custom_preferences_keymap)
+    custom_preferences_system: BoolProperty(name="通用设置: 系统", default=False)
+    custom_preferences_save: BoolProperty(name="通用设置: 保存 & 载入", default=True)
 
 
     # MACHIN3tools
 
-    activate_smart_vert: BoolProperty(name="智能点", default=True, update=update_activate_smart_vert)
-    activate_smart_edge: BoolProperty(name="智能线", default=True, update=update_activate_smart_edge)
-    activate_smart_face: BoolProperty(name="智能面", default=True, update=update_activate_smart_face)
-    activate_clean_up: BoolProperty(name="清理", default=True, update=update_activate_clean_up)
-    activate_clipping_toggle: BoolProperty(name="裁剪切换", default=True, update=update_activate_clipping_toggle)
-    activate_focus: BoolProperty(name="聚焦", default=True, update=update_activate_focus)
-    activate_mirror: BoolProperty(name="镜射", default=True, update=update_activate_mirror)
-    activate_align: BoolProperty(name="对齐", default=True, update=update_activate_align)
-    activate_apply: BoolProperty(name="应用", default=True, update=update_activate_apply)
-    activate_select: BoolProperty(name="选择", default=True, update=update_activate_select)
-    activate_mesh_cut: BoolProperty(name="剪切网(Mesh)", default=True, update=update_activate_mesh_cut)
+    activate_smart_vert: BoolProperty(name="智能工具-顶点", default=True, update=update_activate_smart_vert)
+    activate_smart_edge: BoolProperty(name="智能工具-边", default=True, update=update_activate_smart_edge)
+    activate_smart_face: BoolProperty(name="智能工具-面", default=True, update=update_activate_smart_face)
+    activate_clean_up: BoolProperty(name="清理工具", default=True, update=update_activate_clean_up)
+    activate_clipping_toggle: BoolProperty(name="视图裁切切换", default=True, update=update_activate_clipping_toggle)
+    activate_focus: BoolProperty(name="对焦工具", default=True, update=update_activate_focus)
+    activate_mirror: BoolProperty(name="镜像工具", default=True, update=update_activate_mirror)
+    activate_align: BoolProperty(name="对齐工具", default=True, update=update_activate_align)
+    activate_apply: BoolProperty(name="应用变换", default=True, update=update_activate_apply)
+    activate_select: BoolProperty(name="选择助手", default=True, update=update_activate_select)
+    activate_mesh_cut: BoolProperty(name="网格切割", default=True, update=update_activate_mesh_cut)
     activate_filebrowser_tools: BoolProperty(name="文件浏览器工具", default=True, update=update_activate_filebrowser_tools)
     activate_customize: BoolProperty(name="自定义", default=False, update=update_activate_customize)
 
 
     # MACHIN3pies
 
-    activate_modes_pie: BoolProperty(name="模式 的饼菜单", default=True, update=update_activate_modes_pie)
-    activate_save_pie: BoolProperty(name="保存 的饼菜单", default=True, update=update_activate_save_pie)
-    activate_shading_pie: BoolProperty(name="着色 的饼菜单", default=True, update=update_activate_shading_pie)
-    activate_views_pie: BoolProperty(name="视图 的饼菜单", default=True, update=update_activate_views_pie)
-    activate_align_pie: BoolProperty(name="对齐 的饼菜单", default=True, update=update_activate_align_pie)
-    activate_cursor_pie: BoolProperty(name="游标 的饼菜单", default=True, update=update_activate_cursor_pie)
-    activate_transform_pie: BoolProperty(name="Transform Pie", default=True, update=update_activate_transform_pie)
-    activate_collections_pie: BoolProperty(name="Collections Pie", default=True, update=update_activate_collections_pie)
-    activate_workspace_pie: BoolProperty(name="工作区 的饼菜单", default=False, update=update_activate_workspace_pie)
+    activate_modes_pie: BoolProperty(name="Pie菜单-模式", default=True, update=update_activate_modes_pie)
+    activate_save_pie: BoolProperty(name="保存Pie菜单", default=True, update=update_activate_save_pie)
+    activate_shading_pie: BoolProperty(name="Pie菜单-着色", default=True, update=update_activate_shading_pie)
+    activate_views_pie: BoolProperty(name="Pie菜单-视图", default=True, update=update_activate_views_pie)
+    activate_align_pie: BoolProperty(name="Pie菜单-对齐", default=True, update=update_activate_align_pie)
+    activate_cursor_pie: BoolProperty(name="Pie菜单-游标", default=True, update=update_activate_cursor_pie)
+    activate_transform_pie: BoolProperty(name="Pie菜单-变换", default=True, update=update_activate_transform_pie)
+    activate_collections_pie: BoolProperty(name="Pie菜单-集合", default=True, update=update_activate_collections_pie)
+    activate_workspace_pie: BoolProperty(name="Pie菜单-工作空间", default=False, update=update_activate_workspace_pie)
 
 
     # MACHIN3menus
-    activate_object_context_menu: BoolProperty(name="对象上下文菜单", default=True, update=update_activate_object_context_menu)
+    activate_object_context_menu: BoolProperty(name="对象的索引菜单", default=True, update=update_activate_object_context_menu)
 
 
 
 
     # hidden
 
-    tabs: EnumProperty(name="Tabs", items=preferences_tabs, default="GENERAL")
+    tabs: EnumProperty(name="标签", items=preferences_tabs, default="GENERAL")
     avoid_update: BoolProperty(default=False)
     dirty_keymaps: BoolProperty(default=False)
 
@@ -267,7 +267,7 @@ class MACHIN3toolsPreferences(bpy.types.AddonPreferences):
         # LEFT
 
         b = split.box()
-        b.label(text="触发")
+        b.label(text="激活")
 
 
         # MACHIN3tools
@@ -279,101 +279,101 @@ class MACHIN3toolsPreferences(bpy.types.AddonPreferences):
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_smart_vert", toggle=True)
-        row.label(text="智能顶点操作。")
+        row.label(text="智能顶点操控.")
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_smart_edge", toggle=True)
-        row.label(text="智能边缘创建，操作和转换选中项。")
+        row.label(text="智能边的创建,操控和选择转换.")
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_smart_face", toggle=True)
-        row.label(text="智能平面创建和从面创建物体。")
+        row.label(text="智能面的创建和从面创建对象.")
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_clean_up", toggle=True)
-        row.label(text="快速几何清理。")
+        row.label(text="几何体的快速清理.")
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_clipping_toggle", toggle=True)
-        row.label(text="视口裁剪平面切换。")
+        row.label(text="切换视图裁切平面.")
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_focus", toggle=True)
-        row.label(text="与历史对象隔离。")
+        row.label(text="对象与历史隔离.")
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_mirror", toggle=True)
-        row.label(text="物体镜像 + 非镜像。")
+        row.label(text="镜像对象+取消镜像")
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_align", toggle=True)
-        row.label(text="物体每个轴的位置、旋转和比例对齐。")
+        row.label(text="对象每个轴向的位置,旋转和缩放对齐.")
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_apply", toggle=True)
-        row.label(text="Apply Transformations while keeping the bevel width as well as the child transformations unchanged")
+        row.label(text="应用变化时,同时保持倒角宽度和子变化不变")
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_select", toggle=True)
-        row.label(text="Selection helpers.")
+        row.label(text="选择的助手.")
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_mesh_cut", toggle=True)
-        row.label(text="Knife intersect a mesh, using another object.")
+        row.label(text="切刀与网格相交,使用另一个对象.")
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_filebrowser_tools", toggle=True)
-        row.label(text="Additional tools for the Filebrowser.")
+        row.label(text="文件浏览器的其余工具.")
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_customize", toggle=True)
-        row.label(text="自定义各种 Blender 首选项，设置和键盘映射。")
+        row.label(text="自定义各种Blender的首选项，设置和快捷键映射.")
 
 
         # MACHIN3pies
 
         bb = b.box()
-        bb.label(text="饼菜单")
+        bb.label(text="Pie菜单")
 
         column = bb.column()
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_modes_pie", toggle=True)
-        row.label(text="快速模式更改。")
+        row.label(text="快速进行模式切换.")
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_save_pie", toggle=True)
-        row.label(text="保存，打开，追加。 加载最近，上一个和下一个。 追加世界环境和材质。")
+        row.label(text="保存、打开、追加。载入“最近文件”、“上一个”和“下一个”。追加世界环境和材质.")
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_shading_pie", toggle=True)
-        row.label(text="控制着色，遮罩，eevee 和一些对象属性。")
+        row.label(text="控制着色,覆盖,eevee和一些对象的属性.")
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_views_pie", toggle=True)
-        row.label(text="控制视图。 创建和管理相机。")
+        row.label(text="控制视图,创建和控制摄像机.")
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_align_pie", toggle=True)
-        row.label(text="编辑栅格对齐。")
+        row.label(text="使网格对齐.")
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_cursor_pie", toggle=True)
-        row.label(text="游标相关。")
+        row.label(text="操控游标和原点.")
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_transform_pie", toggle=True)
-        row.label(text="Transform Orientations and Pivots.")
+        row.label(text="变换方向和轴.")
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_collections_pie", toggle=True)
-        row.label(text="Collection management.")
+        row.label(text="集合管理.")
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_workspace_pie", toggle=True)
         r = row.split(factor=0.4)
-        r.label(text="切换工作区。")
-        r.label(text="如果启用，请在 ui/pies.py 中对其进行自定义", icon="INFO")
+        r.label(text="切换工作空间.")
+        r.label(text="如果启用，请在ui/pies.py中对其进行自定义", icon="INFO")
 
 
         # MACHIN3menus
@@ -385,7 +385,7 @@ class MACHIN3toolsPreferences(bpy.types.AddonPreferences):
 
         row = column.split(factor=0.25)
         row.prop(self, "activate_object_context_menu", toggle=True)
-        row.label(text="对象上下文菜单，访问工具，没有键盘映射。")
+        row.label(text="对象的索引菜单,访问类型的工具,没有快捷键映射.")
 
 
         # RIGHT
@@ -397,7 +397,7 @@ class MACHIN3toolsPreferences(bpy.types.AddonPreferences):
 
         if getattr(bpy.types, "MACHIN3_OT_focus", False):
             bb = b.box()
-            bb.label(text="Focus")
+            bb.label(text="对焦")
 
             column = bb.column()
             column.prop(self, "focus_view_transition")
@@ -438,7 +438,7 @@ class MACHIN3toolsPreferences(bpy.types.AddonPreferences):
 
             if self.dirty_keymaps:
                 row = column.row()
-                row.label(text="键盘映射已被修改，需要先恢复它们。", icon="ERROR")
+                row.label(text="已修改了快捷键，请先还原它们.", icon="ERROR")
                 row.operator("machin3.restore_keymaps", text="立刻恢复")
                 row.label()
 
@@ -454,7 +454,7 @@ class MACHIN3toolsPreferences(bpy.types.AddonPreferences):
 
         if getattr(bpy.types, "MACHIN3_MT_modes_pie", False):
             bb = b.box()
-            bb.label(text="模式 的饼菜单")
+            bb.label(text="Pie菜单-模式")
 
             column = bb.column()
 
@@ -465,7 +465,7 @@ class MACHIN3toolsPreferences(bpy.types.AddonPreferences):
 
         if getattr(bpy.types, "MACHIN3_MT_save_pie", False):
             bb = b.box()
-            bb.label(text="保存 的饼菜单：追加世界环境和材质")
+            bb.label(text="保存Pie菜单: 追加世界环境和材质")
 
             column = bb.column()
 
@@ -503,7 +503,7 @@ class MACHIN3toolsPreferences(bpy.types.AddonPreferences):
 
         if getattr(bpy.types, "MACHIN3_MT_shading_pie", False):
             bb = b.box()
-            bb.label(text="着色 的饼菜单：材质捕获开关")
+            bb.label(text="Pie菜单-着色: 切换Matcap着色")
 
             column = bb.column()
 
@@ -516,7 +516,7 @@ class MACHIN3toolsPreferences(bpy.types.AddonPreferences):
         # NO SETTINGS
 
         if not any([getattr(bpy.types, "MACHIN3_" + name, False) for name in ["MT_modes_pie", "MT_save_pie", "MT_shading_pie"]]):
-            b.label(text="没有工具或已激活带有设置的饼图菜单。")
+            b.label(text="工具或Pie菜单未激活.")
 
     def draw_keymaps(self, box):
         wm = bpy.context.window_manager
@@ -528,17 +528,17 @@ class MACHIN3toolsPreferences(bpy.types.AddonPreferences):
         split = box.split()
 
         b = split.box()
-        b.label(text="Tools")
+        b.label(text="工具")
 
         if not self.draw_tool_keymaps(kc, keys, b):
             b.label(text="没有可用的键盘映射，因为没有激活任何工具。")
 
 
         b = split.box()
-        b.label(text="饼菜单")
+        b.label(text="Pie菜单")
 
         if not self.draw_pie_keymaps(kc, keys, b):
-            b.label(text="没有创建键盘映射，因为没有激活馅饼。")
+            b.label(text="快捷键创建失败,因为没有激活任何Pie菜单.")
 
     def draw_about(self, box):
         column = box.column()

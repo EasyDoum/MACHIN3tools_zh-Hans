@@ -6,7 +6,7 @@ import math
 
 selecttypeitems = [("NON-MANIFOLD", "非流形", ""),
                    ("TRIS", "三角面", ""),
-                   ("NGONS", "盎司", "")]
+                   ("NGONS", "N边面", "")]
 
 
 class CleanUp(bpy.types.Operator):
@@ -15,24 +15,24 @@ class CleanUp(bpy.types.Operator):
     bl_options = {'REGISTER', 'UNDO'}
 
     remove_doubles: BoolProperty(name="移除重复", default=True)
-    dissolve_degenerate: BoolProperty(name="溶并无用", default=True)
+    dissolve_degenerate: BoolProperty(name="溶解变质的", default=True)
     distance: FloatProperty(name="合并距离", default=0.0001, min=0, step=0.01, precision=4)
 
     recalc_normals: BoolProperty(name="重新计算法线", default=True)
     flip_normals: BoolProperty(name="翻转法线", default=False)
 
-    delete_loose: BoolProperty(name="删除松散", default=True)
-    delete_loose_verts: BoolProperty(name="删除松散 点", default=True)
-    delete_loose_edges: BoolProperty(name="删除松散 线", default=True)
-    delete_loose_faces: BoolProperty(name="删除松散 面", default=False)
+    delete_loose: BoolProperty(name="删除孤立元素", default=True)
+    delete_loose_verts: BoolProperty(name="删除孤立点", default=True)
+    delete_loose_edges: BoolProperty(name="删除孤立边", default=True)
+    delete_loose_faces: BoolProperty(name="删除孤立面", default=False)
 
-    dissolve_2_edged: BoolProperty(name="溶并线段上的点", default=True)
+    dissolve_2_edged: BoolProperty(name="溶解2边顶点", default=True)
     angle_threshold: FloatProperty(name="角度阈值", default=179, min=0, max=180)
 
     select: BoolProperty(name="选择", default=True)
     select_type: EnumProperty(name="选择", items=selecttypeitems, default="NON-MANIFOLD")
 
-    view_selected: BoolProperty(name="查看选中项", default=False)
+    view_selected: BoolProperty(name="查看所选", default=False)
 
     def draw(self, context):
         layout = self.layout
@@ -41,22 +41,22 @@ class CleanUp(bpy.types.Operator):
         col = box.column()
 
         row = col.row()
-        row.prop(self, "remove_doubles", text="重复")
-        row.prop(self, "dissolve_degenerate", text="无用")
+        row.prop(self, "remove_doubles", text="移除重复")
+        row.prop(self, "dissolve_degenerate", text="溶解变质的")
         r = row.row()
         r.active = any([self.remove_doubles, self.dissolve_degenerate])
         r.prop(self, "distance", text="")
 
         row = col.split(factor=0.33)
-        row.prop(self, "delete_loose", text="松散")
+        row.prop(self, "delete_loose", text="删除孤立元素")
         r = row.row(align=True)
         r.active = self.delete_loose
-        r.prop(self, "delete_loose_verts", text="点", toggle=True)
-        r.prop(self, "delete_loose_edges", text="线", toggle=True)
+        r.prop(self, "delete_loose_verts", text="顶点", toggle=True)
+        r.prop(self, "delete_loose_edges", text="边", toggle=True)
         r.prop(self, "delete_loose_faces", text="面", toggle=True)
 
         row = col.row()
-        row.prop(self, "dissolve_2_edged", text="线段上的点")
+        row.prop(self, "dissolve_2_edged", text="2边顶点")
         r = row.row()
         r.active = self.dissolve_2_edged
         r.prop(self, "angle_threshold", text="角度")
@@ -65,7 +65,7 @@ class CleanUp(bpy.types.Operator):
         row.prop(self, "recalc_normals")
         r = row.row()
         r.active = self.recalc_normals
-        r.prop(self, "flip_normals", text="Flip", toggle=True)
+        r.prop(self, "flip_normals", text="翻转", toggle=True)
 
         box = layout.box()
         col = box.column()

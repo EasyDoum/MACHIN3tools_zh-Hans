@@ -14,7 +14,7 @@ from .. utils.system import makedir
 class Customize(bpy.types.Operator):
     bl_idname = "machin3.customize"
     bl_label = "MACHIN3: 自定义"
-    bl_description = "自定义各种 Blender 首选项，设置和键盘映射。"
+    bl_description = "允许定制Blender的首选项、设置和快捷键."
     bl_options = {'INTERNAL'}
 
     def execute(self, context):

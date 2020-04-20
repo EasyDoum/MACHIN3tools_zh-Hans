@@ -8,27 +8,27 @@ from .. utils.graph import get_shortest_path
 from .. utils.ui import wrap_mouse
 
 
-modeitems = [("MERGE", "Merge", ""),
-             ("CONNECT", "Connect Paths", "")]
+modeitems = [("MERGE", "合并", ""),
+             ("CONNECT", "连接路径", "")]
 
-mergetypeitems = [("LAST", "Last", ""),
-                  ("CENTER", "Center", ""),
-                  ("PATHS", "Paths", "")]
+mergetypeitems = [("LAST", "结束点", ""),
+                  ("CENTER", "中心", ""),
+                  ("PATHS", "路径", "")]
 
 pathtypeitems = [("TOPO", "Topo", ""),
-                 ("LENGTH", "Length", "")]
+                 ("LENGTH", "长度", "")]
 
 
 class SmartVert(bpy.types.Operator):
     bl_idname = "machin3.smart_vert"
-    bl_label = "MACHIN3: 智能点"
+    bl_label = "MACHIN3: 智能工具-点"
     bl_options = {'REGISTER', 'UNDO'}
 
     mode: EnumProperty(name="模式", items=modeitems, default="MERGE")
     mergetype: EnumProperty(name="合并类型", items=mergetypeitems, default="LAST")
     pathtype: EnumProperty(name="路径类型", items=pathtypeitems, default="TOPO")
 
-    slideoverride: BoolProperty(name="滑动遮罩", default=False)
+    slideoverride: BoolProperty(name="滑动覆盖", default=False)
 
     # hidden
     wrongselection = False
@@ -46,23 +46,23 @@ class SmartVert(bpy.types.Operator):
 
         if not self.slideoverride:
             row = column.split(factor=0.3)
-            row.label(text="Mode")
+            row.label(text="模式")
             r = row.row()
             r.prop(self, "mode", expand=True)
 
             if self.mode == "MERGE":
                 row = column.split(factor=0.3)
-                row.label(text="Merge")
+                row.label(text="合并")
                 r = row.row()
                 r.prop(self, "mergetype", expand=True)
 
             if self.mode == "CONNECT" or (self.mode == "MERGE" and self.mergetype == "PATHS"):
                 if self.wrongselection:
-                    column.label(text="You need to select exactly 4 vertices for paths.", icon="INFO")
+                    column.label(text="您需要为路径精确选择4个顶点.", icon="INFO")
 
                 else:
                     row = column.split(factor=0.3)
-                    row.label(text="Shortest Path")
+                    row.label(text="最短路径")
                     r = row.row()
                     r.prop(self, "pathtype", expand=True)
 
